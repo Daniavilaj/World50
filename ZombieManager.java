@@ -81,7 +81,7 @@ public class ZombieManager {
                     zombieManager.zombieCount(facility2);
                     break; 
                 case "g":
-                    System.out.println("\nIt was my pleasure to serving you..."
+                    System.out.println("\nIt was a pleasure to help you..."
                                         + "\n\nStay safe!..."
                                         + "\n\n2020 is scary..."
                                         + "\n\nBye!\n");
@@ -95,7 +95,10 @@ public class ZombieManager {
         scanner.close();
     }
 
-    //constructor
+    /**
+     * Constructor
+     * @param numZombies Initialize 3 locations with specified number of zombies
+     */
     public ZombieManager(int numZombies) {
         locations = new Location[] {new Location("Hospital"), new Location("School"), new Location("Warehouse")};
 
@@ -107,7 +110,11 @@ public class ZombieManager {
         }
     }
 
-    //Locate a Zombie
+    /**
+     * Locate a Zombie
+     * @param zombieid id 
+     * @return Location were Zombie is found
+     */
     public Location locateZombie(int zombieId) {
         boolean found = false;
 
@@ -133,8 +140,12 @@ public class ZombieManager {
         return null;
     }
 
-    //Place a new Zombie in quarantine in a specific location
-    public Location addZombie(String location, String name) {
+    /**
+     * Place a new Zombie in quarantine in a specific location
+     * @param location to add zombie
+     * @param name of Zombie
+     */
+    public void addZombie(String location, String name) {
         Zombie zombie = new Zombie(name);
         boolean foundLoc = false;
 
@@ -145,18 +156,20 @@ public class ZombieManager {
                 System.out.println("\nZombie " + zombie.getName() + " with id number " 
                 + zombie.getId() + " just started quarantine in the " + loc.getName().toUpperCase());
 
-                return loc;
+                return;
             }
         }
 
         if(!foundLoc) {
             System.out.println("\nWe don't have that facility under our management. Try other Location!");
         }
-
-        return null;
     }
 
-    //Remove a Zombie based in their id 
+    /**
+     * Remove a Zombie based in their id 
+     * @param zombieId 
+     * @return Zombie removed
+     */
     public Zombie removeZombie(int zombieId) {
         Location  loc = locateZombie(zombieId);
 
@@ -172,8 +185,12 @@ public class ZombieManager {
         return null;
     }
 
-    //Translate an existing Zombie to the specified location 
-    public Location changeLocation(String location, int zombieId) {
+    /**
+     * Transfer an existing Zombie to the specified location 
+     * @param location to be transfer to
+     * @param zombieId
+     */
+    public void changeLocation(String location, int zombieId) {
         boolean foundLoc = false;
         
         for(Location loc : locations) {
@@ -187,7 +204,7 @@ public class ZombieManager {
                         + zombie.getId() + " was not getting along with the other zombies "+
                         "so he had to be transfered to the " + loc.getName().toUpperCase());
 
-                    return loc;
+                    return;
                 }
             }
         }
@@ -195,10 +212,12 @@ public class ZombieManager {
         if(!foundLoc) {
             System.out.println("\nWe don't have that facility under our management. Try other Location!!");
         }
-
-        return null;
     }
 
+    /**
+     * Zombies on a specific location
+     * @param location
+     */
     public void zombieCount(String location) {
         boolean locFound = false;
 
@@ -214,6 +233,7 @@ public class ZombieManager {
         }
     }
 
+    //Prints Zombie map
     public void printFacilities() {
         for(Location loc : locations) {
             System.out.println(" ");
